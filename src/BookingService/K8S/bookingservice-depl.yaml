@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: bookingservice-depl
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: bookingservice
+    template:
+        metadata:
+            labels:
+                app: bookingservice
+        spec:
+            containers:
+                - name: bookingservice
+                  image: ionipatro/bookingservice:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: bookingservice-clusterip-srv
+spec:
+    type: ClusterIP
+    selector:
+        app: bookingservice
+    ports:
+        - name: bookingservice
+          protocol: TCP
+          port: 80
+          targetPort: 80
