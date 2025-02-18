@@ -86,6 +86,8 @@ public class BookRoomService : IBookRoomService
         return booking;
     }
 
+    public async Task<List<Room>> GetAllRooms() => await _roomRepository.GetAllAsync();
+
     public async Task<List<RoomAvailabilityDto>> GetRoomAvailability(string roomId, DateOnly date)
     {
         // Operating hours
@@ -120,6 +122,8 @@ public class BookRoomService : IBookRoomService
             End = interval.End.ToString(@"hh\:mm")
         }).ToList();
     }
+
+    public async Task<List<Booking>> GetUserBookingsAsync(string userId) => await _bookingRepository.GetUserBookingAsync(userId);
 
     private async Task<bool> IsRoomAvailableAsync(CreateBookingRequest createBookingRequest)
     {

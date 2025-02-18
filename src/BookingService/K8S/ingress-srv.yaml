@@ -25,3 +25,17 @@ spec:
                         name: bookingservice-clusterip-srv
                         port:
                             number: 80
+                - path: /api/Rooms
+                  pathType: Prefix
+                  backend:
+                    service:
+                        name: bookingservice-clusterip-srv
+                        port:
+                            number: 80
+                - path: /message
+                  pathType: Prefix
+                  backend:
+                    service:
+                        name: bookingnotification-clusterip-srv
+                        port:
+                            number: 80

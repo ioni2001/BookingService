@@ -32,13 +32,13 @@ namespace BookingService.Controllers
             return Ok(await _bookRoomService.CreateBookingAsync(bookingRequest));
         }
 
-        [HttpGet("room-availability/{roomId}/{date}")]
+        [HttpGet("user/{userId}")]
         [Authorize]
-        public async Task<ActionResult<List<RoomAvailabilityDto>>> GetRoomAvailability([FromRoute] string roomId, [FromRoute] DateOnly date)
+        public async Task<ActionResult<List<Booking>>> GetUserBookings([FromRoute] string userId)
         {
-            _logger.LogInformation("BookingsController: Trying to get room availability. GetRoomAvailability called. RoomId: {RoomId}. Date: {Date}", roomId, date.ToString());
+            _logger.LogInformation("BookingsController: Trying to user bookings. GetUserBookings called. UserId: {UserId}", userId);
 
-            return Ok(await _bookRoomService.GetRoomAvailability(roomId, date));
+            return Ok(await _bookRoomService.GetUserBookingsAsync(userId));
         }
     }
 }

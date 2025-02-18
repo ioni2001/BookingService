@@ -43,4 +43,11 @@ public class BookingRepository : Repository<Booking>, IBookingRepository
         .SortBy(b => b.StartTime)
         .ToListAsync();
     }
+
+    public async Task<List<Booking>> GetUserBookingAsync(string userId)
+    {
+        return await _collection
+        .Find(b => b.UserId == userId)
+        .ToListAsync();
+    }
 }
