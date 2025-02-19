@@ -89,6 +89,19 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder
+            .SetIsOriginAllowed(origin => true)
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+});
+
+
 var kafkaSettings = builder.Configuration.GetRequiredSection("KafkaSettings").Get<KafkaSettings>();
 var commentsProducerSettings = builder.Configuration.GetRequiredSection("BookingCreatedProducerSettings").Get<TopicSettings>();
 
@@ -126,6 +139,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthentication();
 

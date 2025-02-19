@@ -32,7 +32,7 @@ spec:
                         name: bookingservice-clusterip-srv
                         port:
                             number: 80
-                - path: /message
+                - path: /notifications
                   pathType: Prefix
                   backend:
                     service:
